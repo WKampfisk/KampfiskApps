@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KampfiskApps • Betta Classic</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .betta-fish { transition: transform .3s cubic-bezier(0.4,0,.2,1); }
+    .betta-fish:hover { transform: scale(1.08) rotate(3deg); }
+    .app-card { transition: all .2s cubic-bezier(0.4, 0, 0.2, 1); }
+    .app-card:hover { transform: translateY(-6px); }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100">
+  <nav class="border-b border-slate-800 bg-slate-950/95 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <svg width="42" height="42" viewBox="0 0 100 60" class="betta-fish text-teal-400">
+          <defs><linearGradient id="fishGrad" x1="0%" y1="20%" x2="100%" y2="80%"><stop offset="0%" stop-color="#14b8a6"/><stop offset="100%" stop-color="#0f766e"/></linearGradient></defs>
+          <path d="M12 32 Q28 12 48 26 Q68 8 82 32 Q92 26 98 38 Q88 48 78 42 Q62 54 48 38 Q28 50 12 32" fill="url(#fishGrad)"/>
+          <path d="M8 32 L2 26 L2 38 Z" fill="#f43f5e"/>
+          <circle cx="26" cy="29" r="5" fill="#0f172a"/>
+        </svg>
+        <span class="font-semibold text-2xl tracking-tight">KampfiskApps</span>
+      </div>
+      <div class="flex items-center gap-x-8 text-sm">
+        <a href="#apps" class="hover:text-teal-400 transition">Browse</a>
+        <button onclick="document.getElementById('apps').scrollIntoView({behavior:'smooth'})" class="bg-white text-slate-950 font-semibold px-5 py-2 rounded-2xl text-sm">Explore collection</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="h-[520px] flex items-center relative" style="background-image:url('assets/bg1.jpg');background-size:cover;background-position:center;">
+    <div class="max-w-4xl mx-auto px-8">
+      <h1 class="text-7xl font-semibold tracking-tighter leading-none mb-4 text-white">Apps built<br>with conviction.</h1>
+      <p class="text-xl text-white/80 max-w-md mb-8">A curated collection from Kampfisk. Strong, elegant, and useful — like the fighting fish itself.</p>
+      <button onclick="document.getElementById('apps').scrollIntoView({behavior:'smooth'})" class="px-8 py-3.5 bg-white text-slate-950 font-semibold rounded-2xl">Browse the collection</button>
+    </div>
+  </div>
+
+  <div id="apps" class="max-w-7xl mx-auto px-8 pt-12 pb-16">
+    <h2 class="text-3xl font-semibold mb-6">The Collection</h2>
+    <div id="app-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+  </div>
+
+  <script>
+    const apps = [
+      {id:1,name:"ShroomFinder",tagline:"Pokémon Pokédex for ALL mushrooms & ethnobotanicals",category:"Nature & AR",price:"Freemium",desc:"AR scanner, maps, AI companion with sub-agents and gamified WildDex.",image:"assets/bg1.jpg",github:"https://github.com/WKampfisk/ShroomFinder"},
+      {id:2,name:"Spot-Finder",tagline:"Discover the perfect spots around Steinkjer",category:"Nature & Outdoor",price:"Free",desc:"Interactive map for hiking, fishing and hidden gems in Trøndelag.",image:"assets/bg2.jpg",github:"https://github.com/WKampfisk/Spot-Finder"},
+      {id:3,name:"LesePoeng",tagline:"Screen-time rewards for young readers",category:"Education",price:"Free",desc:"Earn points by reading. Beautiful visual timer for kids.",image:"assets/fish1.jpg",github:null},
+      {id:4,name:"Pasientreiser",tagline:"AI-powered patient travel refunds",category:"Productivity",price:"Free",desc:"Upload statements. Auto-generate perfect Helfo documents.",image:"assets/bg3.jpg",github:null},
+      {id:5,name:"Ocean Floor AR",tagline:"Live AR visualization of seabed depth",category:"AR & Exploration",price:"Free",desc:"Point camera at water to see real-time bathymetry.",image:"assets/bg1.jpg",github:null},
+      {id:6,name:"SeaCam",tagline:"Real-time ocean visualization",category:"AR & Exploration",price:"Free",desc:"GEBCO bathymetry with device sensors.",image:"assets/bg2.jpg",github:null},
+      {id:7,name:"BitMiner",tagline:"Educational simulated Bitcoin mining",category:"Simulations & Tools",price:"Free",desc:"Sub-agent PoW simulation with payouts.",image:"assets/fish2.jpg",github:null},
+      {id:8,name:"Treprodukter",tagline:"AI design platform for handmade wood",category:"Design & Making",price:"Contact",desc:"Hand-tool only wood product designs.",image:"assets/bg3.jpg",github:null}
+    ];
+
+    function renderApps() {
+      const grid = document.getElementById('app-grid');
+      grid.innerHTML = apps.map(app => `
+        <div class="app-card bg-slate-900 border border-slate-700 rounded-3xl overflow-hidden cursor-pointer" onclick="showModal(${app.id})">
+          <div class="h-40 bg-cover bg-center relative" style="background-image:url('${app.image}')"></div>
+          <div class="p-5">
+            <div class="font-semibold">${app.name}</div>
+            <div class="text-sm text-slate-400">${app.tagline}</div>
+            <div class="mt-4 text-sm flex justify-between"><span class="text-emerald-400">${app.price}</span><span class="text-teal-400 text-xs">Details →</span></div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function showModal(id) {
+      const app = apps.find(a => a.id === id);
+      alert(`${app.name}\n\n${app.desc}\n\nPrice: ${app.price}` + (app.github ? `\n\nGitHub: ${app.github}` : ''));
+    }
+
+    window.onload = renderApps;
+  </script>
+</body>
+</html>
