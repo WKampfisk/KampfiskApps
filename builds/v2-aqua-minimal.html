@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KampfiskApps • Aqua Minimal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-slate-900">
+  <div class="max-w-5xl mx-auto px-8">
+    <div class="flex justify-between items-center py-10">
+      <div class="flex items-center gap-3">
+        <svg width="36" height="36" viewBox="0 0 100 60" class="text-teal-700"><path d="M12 32 Q28 12 48 26 Q68 8 82 32 Q92 26 98 38 Q88 48 78 42 Q62 54 48 38 Q28 50 12 32" fill="currentColor"/></svg>
+        <span class="font-semibold text-2xl tracking-[-1px]">kampfiskapps</span>
+      </div>
+    </div>
+    <div class="py-10 text-center border-b">
+      <h1 class="text-6xl font-semibold tracking-tighter">Simple tools.<br>Thoughtfully made.</h1>
+    </div>
+    <div id="apps" class="pt-10 grid grid-cols-1 md:grid-cols-2 gap-8 pb-20"></div>
+  </div>
+  <script>
+    const apps = [ {id:1,name:"ShroomFinder",tagline:"Pokémon Pokédex for ALL mushrooms",price:"Freemium",desc:"AR + AI collector app."}, {id:2,name:"Spot-Finder",tagline:"Local nature spots",price:"Free",desc:"Steinkjer area guide."}, {id:3,name:"LesePoeng",tagline:"Reading rewards for kids",price:"Free",desc:"Earn screen time."}, {id:4,name:"Pasientreiser",tagline:"Patient travel refunds",price:"Free",desc:"AI document generation."}, {id:5,name:"Ocean Floor AR",tagline:"Seabed AR",price:"Free",desc:"Live depth visualization."}, {id:6,name:"SeaCam",tagline:"Ocean explorer",price:"Free",desc:"GEBCO viewer."}, {id:7,name:"BitMiner",tagline:"Mining simulation",price:"Free",desc:"Educational tool."}, {id:8,name:"Treprodukter",tagline:"Wood product designer",price:"Contact",desc:"Hand tool AI."} ];
+    function render() {
+      const g = document.getElementById('apps');
+      g.innerHTML = apps.map(a => `<div class="border p-6 rounded-3xl cursor-pointer" onclick="alert('${a.name}: ${a.desc}')"> <div class="font-semibold">${a.name}</div> <div class="text-sm text-slate-500">${a.tagline}</div> <div class="text-xs mt-2 text-teal-700">${a.price}</div> </div>`).join('');
+    }
+    window.onload = render;
+  </script>
+</body>
+</html>
