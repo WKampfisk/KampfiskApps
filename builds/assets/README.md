@@ -1,3 +1,7 @@
-Place your fish logo and background JPGs here.
+Siamese fighting fish (Betta) assets for the 5 storefront designs.
 
-Generated Siamese fighting fish images have been placed in this folder for the 5 designs.
+Files:
+- bg-hero-1.jpg, bg-hero-2.jpg : Hero backgrounds
+- fish1.jpg, fish2.jpg, bg1.jpg etc : Supporting imagery
+
+All HTML builds reference these relative paths.
