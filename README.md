@@ -34,9 +34,20 @@ npm install
 npm run dev
 ```
 
+## Stripe payments (test mode)
+
+The storefront is ready for server-side Stripe Checkout through Vercel. It does not expose a Stripe secret key in the browser.
+
+1. Create the paid product and price in the Stripe Dashboard (test mode).
+2. Add its Stripe price ID as a Vercel environment variable.
+3. Add its product ID to `api/create-checkout-session.js`, then set the same `productId` on the relevant item in `src/data/apps.js`.
+4. Add `STRIPE_SECRET_KEY` and `PUBLIC_SITE_URL` in Vercel. Copy `.env.example` as a safe reference; never commit real keys.
+
+Stripe Checkout handles the payment page. Before taking real payments, set up the legal business details, tax settings, fulfilment/download delivery, refund policy, and a Stripe webhook for confirmed orders.
+
 ## IONOS Domain
 
-Domain is registered in IONOS (oivind.waage90@gmail.com). Once you choose your favorite design, we can point the domain and deploy (CNAME + GitHub Pages or static hosting on IONOS).
+Deploy the project to Vercel, add `kampfiskapps.com` as a custom domain, then enter the DNS records Vercel shows in IONOS. Vercel will issue HTTPS automatically after the records propagate.
 
 ## Apps in the Catalog
 

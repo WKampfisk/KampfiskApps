@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react'
-import { Search, X, ExternalLink, Github, Star, ArrowRight } from 'lucide-react'
+import { Search, X, ExternalLink, Github, ArrowRight, ShoppingBag, LoaderCircle } from 'lucide-react'
 import { apps, categories } from './data/apps'
 
 function App() {
@@ -7,6 +7,7 @@ function App() {
   const [activeCategory, setActiveCategory] = useState('All')
   const [selectedApp, setSelectedApp] = useState(null)
   const [sortMode, setSortMode] = useState('featured') // featured | name | category
+  const [checkoutState, setCheckoutState] = useState('idle')
 
   // Filter + search + sort
   const filteredApps = useMemo(() => {
@@ -52,6 +53,24 @@ function App() {
   const handleKeyDown = (e) => {
     if (e.key === 'Escape' && selectedApp) {
       closeModal()
+    }
+  }
+
+  const startCheckout = async (app) => {
+    if (!app.productId || checkoutState === 'loading') return
+
+    setCheckoutState('loading')
+    try {
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId: app.productId }),
+      })
+      const payload = await response.json()
+      if (!response.ok || !payload.url) throw new Error(payload.error || 'Kunne ikke starte betaling')
+      window.location.assign(payload.url)
+    } catch (error) {
+      setCheckoutState('error')
     }
   }
 
@@ -310,6 +329,16 @@ function App() {
 
               {/* Action Buttons */}
               <div className="flex flex-wrap gap-3 mt-8">
+                {selectedApp.productId && (
+                  <button
+                    onClick={() => startCheckout(selectedApp)}
+                    disabled={checkoutState === 'loading'}
+                    className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 bg-emerald-400 hover:bg-emerald-300 disabled:opacity-60 text-slate-950 font-semibold py-3 px-6 rounded-2xl transition"
+                  >
+                    {checkoutState === 'loading' ? <LoaderCircle className="animate-spin" size={18} /> : <ShoppingBag size={18} />}
+                    Kjøp sikkert med Stripe
+                  </button>
+                )}
                 {selectedApp.github && (
                   <a 
                     href={selectedApp.github} 
@@ -352,6 +381,9 @@ function App() {
               <div className="mt-6 text-xs text-slate-500">
                 Status: {selectedApp.status} • Built by Kampfisk
               </div>
+              {checkoutState === 'error' && (
+                <p className="mt-3 text-sm text-rose-300">Betalingen er ikke konfigurert ennå. Prøv igjen senere.</p>
+              )}
             </div>
           </div>
         </div>
