@@ -3,6 +3,22 @@
 
 export const apps = [
   {
+    id: "fitfam-connect",
+    name: "FitFam Connect",
+    tagline: "Familielek hjemme — Puterelven, 3D-avatarer, én neste handling",
+    description: "FitFam gjør stua til en lekeplass. Default for 4–8 barn er Puterelven (gulvet er lava): puter er trygge, klokka går, alle over. 3D-stiliserte avatarer, ikke fotorealistiske barn. CTA Åpne FitFam. Premium 49 kr/mnd, Family Plus 79 kr/mnd.",
+    longDescription: "FitFam Connect er første produkt i KampfiskApps Growth. Aktivitetskort med klokke i bildet, Grok Imagine + HyperFrames for lekereklame, og HeyGen kun for presenter-intro. Ingen checkout i reklamen — Åpne FitFam går til prøven. Priser eies av Stripe (49/79 kr).",
+    category: "Family",
+    price: "49 / 79 kr/mnd",
+    productId: null,
+    status: "Live",
+    github: "https://github.com/WKampfisk/fitfam-connect",
+    demo: "https://fitfam-trial.base44.app",
+    ctaLabel: "Åpne FitFam",
+    tags: ["Kids", "Family", "Norwegian", "Play"],
+    image: "/app-covers/fitfam-connect.jpg",
+  },
+  {
     id: "shroomfinder",
     name: "ShroomFinder",
     tagline: "Pokémon Pokédex for ALL mushrooms & ethnobotanicals",
@@ -129,6 +145,7 @@ export const apps = [
 
 export const categories = [
   "All",
+  "Family",
   "Nature & AR",
   "Nature & Outdoor",
   "Education",

@@ -339,25 +339,28 @@ function App() {
                     Kjøp sikkert med Stripe
                   </button>
                 )}
-                {selectedApp.github && (
-                  <a 
-                    href={selectedApp.github} 
-                    target="_blank" 
+                {selectedApp.demo && (
+                  <a
+                    href={selectedApp.demo}
+                    target="_blank"
                     rel="noreferrer"
                     className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-100 text-slate-950 font-semibold py-3 px-6 rounded-2xl transition"
                   >
-                    <Github size={18} /> View on GitHub
+                    {selectedApp.ctaLabel || 'Live Demo'} <ExternalLink size={17} />
                   </a>
                 )}
-
-                {selectedApp.demo && (
-                  <a 
-                    href={selectedApp.demo} 
-                    target="_blank" 
+                {selectedApp.github && (
+                  <a
+                    href={selectedApp.github}
+                    target="_blank"
                     rel="noreferrer"
-                    className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 border border-slate-600 hover:bg-slate-800 py-3 px-6 rounded-2xl transition"
+                    className={`flex-1 sm:flex-none inline-flex items-center justify-center gap-2 py-3 px-6 rounded-2xl transition ${
+                      selectedApp.demo
+                        ? 'border border-slate-600 hover:bg-slate-800'
+                        : 'bg-white hover:bg-slate-100 text-slate-950 font-semibold'
+                    }`}
                   >
-                    Live Demo <ExternalLink size={17} />
+                    <Github size={18} /> View on GitHub
                   </a>
                 )}
 
